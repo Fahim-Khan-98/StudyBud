@@ -51,9 +51,9 @@
     <div>
         <h3> participants </h3>
         <hr>
-        {% for participate in participants %}
+        {% for message in participants %}
            <div>
-            <p>@ {{participate.username}}</p>
+            <p>@ {{message.username}}</p>
            </div>
         {% endfor %}
     </div>
