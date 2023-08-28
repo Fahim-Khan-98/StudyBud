@@ -4,36 +4,34 @@
 
 {% block content %}
 {% include 'navbar.html' %}
+
 <style>
-    .home-container{
+    .user-container{
         display: grid;
         grid-template-columns: 1fr 3fr 1fr;
         margin-left: 10px;
         padding: 10px;
     }
 </style>
-<div class="home-container">
-    <div>
-        <!-- tpoic -->
-        {% include 'base/topic_component.html' %}
-    </div>
-    
-    <div>
-        <h5>There are {{ room_count }} room are available.</h5>
-        <a href="{% url 'create-room' %}" >Create Room</a>
+ 
+<p>This is  <b><span style="color:rgb(255, 102, 0)">{{user.username}}'s</span></b> Profile</p>
 
+<div class="user-container">
+
+    <div>
+         <!-- tpoic -->
+         {% include 'base/topic_component.html' %}
+    </div>
+
+    <div>
         {% include 'base/feed_component.html' %}
-        
-
     </div>
 
     <div>
-        <!-- activity -->
+         <!-- activity -->
        {% include 'base/activity_component.html' %}
     </div>
-      
-    
 </div>
 
-
 {% endblock %}
+

@@ -30,6 +30,7 @@ from .forms import RoomForm
 #     return render(request,'base/room.html', context)
 
 
+
 # ****** Database value view
 def home(request):
     
@@ -40,10 +41,12 @@ def home(request):
     
     room_count = rooms.count()
     topics = Topic.objects.all()
-    room_messages = Message.objects.all()
+    room_messages = Message.objects.filter(Q(room__topic__name__icontains=q) |
+                                           Q(room__name__icontains=q))
     context={'rooms': rooms, 'topics':topics, 'room_count': room_count,
     'room_messages': room_messages}
     return render(request,'base/home.html',context)
+
 
 def room(request, pk):
     room = Room.objects.get(pk=pk)
@@ -60,6 +63,16 @@ def room(request, pk):
     context = {'room':room, 'room_messages': room_messages,
                'participants': participants}
     return render(request,'base/room.html', context)
+
+
+def UserProfile(request, pk):
+    user = User.objects.get(id=pk)
+    rooms = user.room_set.all()
+    room_messages = user.message_set.all()
+    topics = Topic.objects.all()
+    context = {'user': user, 'rooms': rooms,
+             'topics': topics, 'room_messages': room_messages}
+    return render(request, 'base/user_profile.html',context)
 
 
 @login_required(login_url='login')
@@ -90,32 +103,6 @@ def UpdateRoom(request, pk):
             return redirect('home')
     context = {'form': form}
     return render(request, 'base/room_form.html', context)
-
-
-
-@login_required(login_url='login')
-def DeleteRoom(request, pk):
-    room = Room.objects.get(id=pk)
-    if request.user != room.host:
-        return HttpResponse("You are not allowed to delete this post.....")
-    if request.method == 'POST':
-        room.delete()
-        return redirect('home')
-    context = {'obj': room}
-    return render(request, 'base/delete.html',context)
-
-
-@login_required(login_url='login')
-def DeleteMessage(request, pk):
-    message = Message.objects.get(id=pk)
-    if request.user != message.user:
-        return HttpResponse("You are not allowed to delete this post.....")
-    if request.method == 'POST':
-        message.delete()
-        # return redirect('room', pk=room.id)
-        return redirect('home')
-    context = {'obj': message}
-    return render(request, 'base/delete.html',context)
 
 
 def LoginPage(request):
@@ -159,3 +146,30 @@ def RegisterPage(request):
             messages.error(request, 'An error occured during registration!!!!!!')
     context = {'form': form}
     return render(request, 'base/login_register.html', context)
+
+
+
+@login_required(login_url='login')
+def DeleteRoom(request, pk):
+    room = Room.objects.get(id=pk)
+    if request.user != room.host:
+        return HttpResponse("You are not allowed to delete this post.....")
+    if request.method == 'POST':
+        room.delete()
+        return redirect('home')
+    context = {'obj': room}
+    return render(request, 'base/delete.html',context)
+
+
+@login_required(login_url='login')
+def DeleteMessage(request, pk):
+    message = Message.objects.get(id=pk)
+    if request.user != message.user:
+        return HttpResponse("You are not allowed to delete this post.....")
+    if request.method == 'POST':
+        message.delete()
+        # return redirect('room', pk=room.id)
+        return redirect('home')
+    context = {'obj': message}
+    return render(request, 'base/delete.html',context)
+

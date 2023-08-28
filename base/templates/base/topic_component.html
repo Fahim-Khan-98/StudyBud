@@ -1,0 +1,16 @@
+
+
+
+<h3>Browse Container</h3>
+        <hr>
+        <div>
+            <a href="{% url 'home' %}">ALL</a>
+        </div>
+
+        {% for topic in topics %}
+            <div>
+                <!-- <h5> {{topic.name}} </h5><br> -->
+            <a href="{% url 'home' %}?q={{topic.name}}">{{topic.name}}</a>
+            </div>
+        {% endfor %}
+        <hr>
