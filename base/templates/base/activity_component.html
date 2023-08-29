@@ -5,8 +5,8 @@
             {% for message in room_messages %}
                 <div>
                
-                  <p><b><span style="color:rgb(255, 102, 0)">@ {{ message.user }}</b><span> {{ message.created | timesince }} ago</p>  
-                  <small>Replied  to <span style="color:rgb(3, 76, 170)">"{{ message.room }}"</span> </small>
+                  <p><b><span style="color:rgb(255, 102, 0)"><a href="{% url 'user-profile' message.user.id %}">@ {{ message.user }}</a><span></b> {{ message.created | timesince }} ago</p>  
+                  <small>Replied  to <span style="color:rgb(3, 76, 170)"><a href="{% url 'room' message.room.id %}">"{{ message.room }}"</span> </small>
                   <p> {{ message.body }} </p>
 
                   {% if request.user == message.user %}

@@ -11,7 +11,7 @@
     <div>
         <a href="/"> <h1>LOGO</h1> </a>
         {% if user.is_authenticated %}
-        <p><b><span style="color:rgb(255, 102, 0)">Welcome {{ user.username }} !!!</span></b></p>       
+        <p><b><span style="color:rgb(255, 102, 0)">Welcome<a href="{% url 'user-profile' user.id %}"> {{ user.username }}</a> !!!</span></b></p>       
          {% endif %}
     </div>
 

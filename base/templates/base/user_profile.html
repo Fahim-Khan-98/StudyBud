@@ -13,17 +13,21 @@
         padding: 10px;
     }
 </style>
+
  
-<p>This is  <b><span style="color:rgb(255, 102, 0)">{{user.username}}'s</span></b> Profile</p>
+<!-- <p>This is  <b><span style="color:rgb(255, 102, 0)">{{user.username}}'s</span></b> Profile</p> -->
 
 <div class="user-container">
 
     <div>
          <!-- tpoic -->
-         {% include 'base/topic_component.html' %}
+      {% include 'base/topic_component.html' %} 
     </div>
 
     <div>
+        <b><span style="color:rgb(5, 111, 172)">@{{user.username}}'s Recent post......</span></b>
+        <br><br>
+
         {% include 'base/feed_component.html' %}
     </div>
 
