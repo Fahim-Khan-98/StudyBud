@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+
+{% block content %}
+
+
+<style>
+    .room-container{
+        margin: 10px 0 10px 0;
+        padding: 10px;
+    }
+</style>
+
+<div class="room-container">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="Submit"/>
+    </form>
+    <br>
+</div>
+
+
+
+{% endblock %}
