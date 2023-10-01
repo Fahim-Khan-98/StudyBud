@@ -12,6 +12,9 @@ urlpatterns = [
     path('delete-message/<str:pk>/',views.DeleteMessage, name="delete-message"),
 
 
+     path('update-user/',views.UpdateUser, name="update-user"),
+
+
     # Authentication
     path('register/',views.RegisterPage, name="register"),
     path('login/',views.LoginPage, name="login"),
