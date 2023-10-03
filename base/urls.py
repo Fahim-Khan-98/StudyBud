@@ -5,6 +5,7 @@ urlpatterns = [
     path('',views.home, name="home"),
     path('room/<str:pk>/',views.room, name="room"),
     path('user-profile/<str:pk>/',views.UserProfile, name="user-profile"),
+    path('update-user/',views.UpdateUser, name="update-user"),
 
     path('create-room/',views.CreateRoom, name="create-room"),
     path('update-room/<str:pk>/',views.UpdateRoom, name="update-room"),
@@ -12,7 +13,10 @@ urlpatterns = [
     path('delete-message/<str:pk>/',views.DeleteMessage, name="delete-message"),
 
 
-     path('update-user/',views.UpdateUser, name="update-user"),
+    path('topic/',views.TopicPage, name="topics"),
+
+
+     
 
 
     # Authentication
