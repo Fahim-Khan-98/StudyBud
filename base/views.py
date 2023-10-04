@@ -215,3 +215,12 @@ def TopicPage(request):
     }
 
     return render(request, 'base/topics.html',context)
+
+
+def ActivityPage(request):
+    room_messages = Message.objects.all()
+    context = {
+        'room_messages': room_messages
+    }
+
+    return render(request, 'base/activity.html',context)

@@ -14,6 +14,7 @@ urlpatterns = [
 
 
     path('topic/',views.TopicPage, name="topics"),
+    path('activity/',views.ActivityPage, name="activity"),
 
 
      
